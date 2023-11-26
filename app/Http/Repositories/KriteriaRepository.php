@@ -5,6 +5,7 @@ namespace App\Http\Repositories;
 use App\Models\Kriteria;
 use App\Models\Penilaian;
 use App\Models\SubKriteria;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class KriteriaRepository
@@ -16,6 +17,7 @@ class KriteriaRepository
         $this->kriteria = $kriteria;
         $this->subKriteria = $subKriteria;
         $this->penilaian = $penilaian;
+
     }
 
     public function getAll()
@@ -54,11 +56,31 @@ class KriteriaRepository
 
     public function hapus($id)
     {
-        $data = [
-            $this->penilaian->where('kriteria_id', $id)->delete(),
-            $this->subKriteria->where('kriteria_id', $id)->delete(),
-            $this->kriteria->where('id', $id)->delete(),
-        ];
+        // dd($this->kriteria);
+        try {
+            DB::beginTransaction();
+
+            $this->penilaian->where('kriteria_id', $id)->delete();
+            $this->subKriteria->where('kriteria_id', $id)->delete();
+            DB::table('ideal_negatif')->where('kriteria_id', $id)->delete();
+            DB::table('ideal_positif')->where('kriteria_id', $id)->delete();
+            DB::table('matriks_keputusan')->where('kriteria_id', $id)->delete();
+            DB::table('matriks_normalisasi_bobot_keputusan')->where('kriteria_id', $id)->delete();
+            DB::table('matriks_normalisasi_keputusan')->where('kriteria_id', $id)->delete();
+            $this->kriteria->where('id', $id)->delete();
+        
+            DB::commit();
+
+            return true;
+        } catch (Exception $e) {
+            dd($e);
+        }
+        // $data = [
+        //     $this->penilaian->where('kriteria_id', $id)->delete(),
+        //     $this->subKriteria->where('kriteria_id', $id)->delete(),
+        //     $this->kriteria->where('id', $id)->delete(),
+        // ];
+        dd($data);
         return $data;
     }
 

@@ -5,10 +5,13 @@
         <div class="flex-none w-full max-w-full px-3">
             @if ($data != null)
                 @foreach ($data as $item)
+                    @php
+                        $labelKriteria = str_replace(" ", "_", $item['kriteria'])
+                    @endphp
                     <div class="relative flex flex-col min-w-0 mb-5 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                         <div class="flex flex-row items-center justify-between p-6 pb-0 mb-4 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                             <h6>Tabel Kriteria <span class="text-greenPrimary">{{ $item['kriteria'] }}</span></h6>
-                            <label for="add_button" id="label_{{ $item['kriteria'] }}" class="cursor-pointer inline-block px-3 py-2 font-bold text-center text-white rounded-lg text-sm ease-soft-in shadow-soft-md bg-gradient-to-br from-greenPrimary to-greenPrimary/80 shadow-soft-md hover:shadow-soft-xs active:opacity-85 hover:scale-102 transition-all">
+                            <label for="add_button" id="label_{{ $labelKriteria }}" class="cursor-pointer inline-block px-3 py-2 font-bold text-center text-white rounded-lg text-sm ease-soft-in shadow-soft-md bg-gradient-to-br from-greenPrimary to-greenPrimary/80 shadow-soft-md hover:shadow-soft-xs active:opacity-85 hover:scale-102 transition-all">
                                 <i class="ri-add-fill"></i>
                                 Tambah {{ $judul }}
                             </label>
@@ -152,8 +155,13 @@
     <script>
         // Tabel
         $(document).ready(function() {
+            let labelKriteria = ""
+            let label = ""
             @if ($data != null)
                 @foreach ($data as $item)
+                    labelKriteria = "{{ $item['kriteria'] }}".replaceAll(" ", "_");
+                    label = "#label_" + labelKriteria
+
                     $("#tabel_data_{{ $item['kriteria'] }}").DataTable({
                         responsive: true,
                         order: [],
@@ -161,7 +169,7 @@
                     .columns.adjust()
                     .responsive.recalc();
                     
-                    $("#label_{{ $item['kriteria'] }}").click(function () { 
+                    $(label).click(function () { 
                         $("#title_add_button").html("{{ $item['kriteria'] }}");
                         $("#kriteria_id_add_button").val("{{ $item['kriteria_id'] }}");
                     });

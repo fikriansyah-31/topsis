@@ -12,11 +12,6 @@
                             Tambah {{ $judul }}
                         </label>
                         <script>
-            document.getElementById('label_{{ $item['kriteria'] }}').addEventListener('click', function() {
-                // Add your logic to handle the click event here
-                // For example, you can redirect to a new page or open a modal
-                // window.location.href = "{{ route('your.route.name') }}";
-            });
         </script>
                     @else
                     <button for="add_button" class="inline-block px-3 py-2 font-bold text-center text-white rounded-lg text-sm ease-soft-in shadow-soft-md bg-gradient-to-br from-greenPrimary to-greenPrimary/80 opacity-50 shadow-soft-md" disabled>
@@ -56,7 +51,7 @@
                             <tr>
                                 <td style="text-align: center" class="font-bold" colspan="2">Total Bobot:</td>
                                 <td class="font-bold" colspan="2">
-                                    @if ($sumBobot < 1)
+                                    @if ($sumBobot > 1)
                                         {{ $sumBobot }}
                                     @else
                                         {{ $sumBobot }} <span class="text-error"> (max)</span>
@@ -231,7 +226,7 @@
                     "id": id
                 },
                 success: function (data) {
-                    // console.log(data);
+                    console.log(data);
                     let items = [];
                     $.each(data, function(key, val) {
                         items.push(val);
@@ -285,8 +280,11 @@
                                     location.reload();
                                 }
                             });
+                            console.log(response);
                         },
                         error: function (response) {
+                            console.log(response);
+
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Data gagal dihapus!',
