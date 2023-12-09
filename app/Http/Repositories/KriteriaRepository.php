@@ -69,6 +69,7 @@ class KriteriaRepository
             DB::table('matriks_keputusan')->where('kriteria_id', $id)->delete();
             DB::table('matriks_normalisasi_bobot_keputusan')->where('kriteria_id', $id)->delete();
             DB::table('matriks_normalisasi_keputusan')->where('kriteria_id', $id)->delete();
+            DB::table('pm_penilaian')->where('kriteria_id', $id)->delete();
             $this->kriteria->where('id', $id)->delete();
 
             DB::commit();
