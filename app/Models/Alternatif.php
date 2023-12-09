@@ -22,4 +22,22 @@ class Alternatif extends Model
     {
         return $this->belongsTo(Objek::class);
     }
+
+    public function pmKriteria()
+    {
+        return $this->belongsToMany(Kriteria::class, 'pm_penilaian')
+            ->orderby('alternatif_id')
+            ->orderBy('kriteria_id')
+            ->withPivot('nilai')->withTimestamps();
+    }
+
+    public function hasilTopsis()
+    {
+        return $this->hasOne(HasilSolusiTopsis::class);
+    }
+
+    public function hasilPm()
+    {
+        return $this->hasOne(HasilPm::class);
+    }
 }

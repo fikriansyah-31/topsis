@@ -8,6 +8,7 @@ use App\Models\Alternatif;
 use App\Models\Kriteria;
 use App\Models\Objek;
 use App\Models\Penilaian;
+use App\Models\PmPenilaian;
 use App\Models\SubKriteria;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -38,15 +39,19 @@ class DatabaseSeeder extends Seeder
         $kode = ["A", "B", "C", "D"];
         $nama = ["Sangat Baik", "Baik", "Biasa", "Kurang Baik"];
         $nilai = [9, 8, 7, 6];
-        
+
         $namaKriteria = ["Style", "Reliability", "Fuel-Economy", "Cost"];
         $bobot = [0.1, 0.4, 0.3, 0.2];
+        $target = [3, 4, 4, 5];
+        $tipe = ["secondary", "core", "core", "core"];
 
         for ($i = 0; $i < 4; $i++) {
             Kriteria::create([
                 "kode" => $kode[$i],
                 "nama" => $namaKriteria[$i],
                 "bobot" => $bobot[$i],
+                "target" => $target[$i],
+                "tipe" => $tipe[$i],
             ]);
         }
 
@@ -89,5 +94,29 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+
+        $alternatif = Alternatif::get();
+        $kriteria = Kriteria::get();
+        $penilaian = [
+            [3, 5, 2, 5],
+            [2, 4, 3, 3],
+            [4, 4, 4, 3],
+            [5, 3, 4, 4],
+        ];
+        $pmPenilaian = [];
+
+        foreach ($alternatif as $va => $alt) {
+            foreach ($kriteria as $ka => $kr) {
+                $pmPenilaian[] = [
+                    'alternatif_id' => $alt->id,
+                    'kriteria_id' => $kr->id,
+                    'nilai' => $penilaian[$va][$ka],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ];
+            }
+        }
+
+        PmPenilaian::insert($pmPenilaian);
     }
 }

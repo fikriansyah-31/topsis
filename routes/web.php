@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ObjekController;
 use App\Http\Controllers\PenilaianController;
+use App\Http\Controllers\PmController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubKriteriaController;
 use App\Http\Controllers\TopsisController;
@@ -93,6 +94,24 @@ Route::group([
     Route::get('/perhitungan', [TopsisController::class, 'index'])->name('perhitungan');
     Route::post('/hitung_topsis', [TopsisController::class, 'hitungTopsis'])->name('hitung_topsis');
     Route::get('/hasil_akhir', [TopsisController::class, 'hasilAkhir'])->name('hasil_akhir');
+
+    Route::group([
+        'prefix' => 'pm-penilaian'
+    ], function () {
+        Route::get('/', [PenilaianController::class, 'pmPenilaianIndex'])->name('penilaian.pm');
+        Route::get('/ubah/{alternatif}', [PenilaianController::class, 'pmPenilaianUbah'])->name('penilaian.pm.ubah');
+        Route::post('/ubah/{alternatif}', [PenilaianController::class, 'pmPenilaianPerbaharui'])->name('penilaian.pm.update');
+    });
+
+    Route::group([
+        'prefix' => 'pm-perhitungan'
+    ], function () {
+        Route::get('/', [PmController::class, 'index'])->name('perhitungan.pm');
+        Route::get('/hasil-akhir', [PmController::class, 'hasilAkhir'])->name('perhitungan.pm.hasil');
+        Route::get('/simpan-hasil-akhir', [PmController::class, 'simpanHasil'])->name('simpan.hasil.pm');
+    });
+
+    Route::get('perbandingan', [PmController::class, 'perbandingan'])->name('perbandingan');
 });
 
 require __DIR__.'/auth.php';

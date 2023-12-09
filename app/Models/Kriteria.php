@@ -18,6 +18,8 @@ class Kriteria extends Model
         "kode",
         "nama",
         "bobot",
+        "target",
+        "tipe",
     ];
 
     public function subKriteria()

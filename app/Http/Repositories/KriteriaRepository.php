@@ -50,6 +50,8 @@ class KriteriaRepository
             "kode" => $data['kode'],
             "nama" => $data['nama'],
             "bobot" => $data['bobot'],
+            "target" => $data['target'],
+            "tipe" => $data['tipe'],
         ]);
         return $data;
     }
@@ -68,7 +70,7 @@ class KriteriaRepository
             DB::table('matriks_normalisasi_bobot_keputusan')->where('kriteria_id', $id)->delete();
             DB::table('matriks_normalisasi_keputusan')->where('kriteria_id', $id)->delete();
             $this->kriteria->where('id', $id)->delete();
-        
+
             DB::commit();
 
             return true;
