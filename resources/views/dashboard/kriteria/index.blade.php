@@ -27,6 +27,8 @@
                                 <th>Kode</th>
                                 <th>Nama</th>
                                 <th>Bobot</th>
+                                <th>Target</th>
+                                <th>Tipe</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -36,6 +38,8 @@
                                     <td>{{ $item->kode }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->bobot }}</td>
+                                    <td>{{ $item->target }}</td>
+                                    <td>{{ $item->tipe }}</td>
                                     <td class="flex gap-x-3">
                                         <label for="edit_button" class="cursor-pointer" onclick="return edit_button('{{ $item->id }}')">
                                             <i class="ri-pencil-line text-xl"></i>
@@ -50,7 +54,7 @@
                         <tfoot>
                             <tr>
                                 <td style="text-align: center" class="font-bold" colspan="2">Total Bobot:</td>
-                                <td class="font-bold" colspan="2">
+                                <td class="font-bold" colspan="4">
                                     @if ($sumBobot > 1)
                                         {{ $sumBobot }}
                                     @else
@@ -99,6 +103,31 @@
                                 <input type="number" step="0.1" name="bobot" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" value="{{ old('bobot') }}" required />
                                 <label class="label">
                                     @error('bobot')
+                                        <span class="label-text-alt text-error">{{ $message }}</span>
+                                    @enderror
+                                </label>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class="label-text">Target</span>
+                                </label>
+                                <input type="number" step="1" min="1" max="5" name="target" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" value="{{ old('target') }}" required />
+                                <label class="label">
+                                    @error('target')
+                                        <span class="label-text-alt text-error">{{ $message }}</span>
+                                    @enderror
+                                </label>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class="label-text">Tipe</span>
+                                </label>
+                                <select name="tipe" class="input input-bordered w-full max-w-xs text-dark">
+                                    <option value="core">Core</option>
+                                    <option value="secondary">Secondary</option>
+                                </select>
+                                <label class="label">
+                                    @error('tipe')
                                         <span class="label-text-alt text-error">{{ $message }}</span>
                                     @enderror
                                 </label>
@@ -152,6 +181,31 @@
                                 <input type="number" step="0.1" name="bobot" placeholder="Type here" class="input input-bordered w-full text-dark" required />
                                 <label class="label">
                                     @error('bobot')
+                                        <span class="label-text-alt text-error">{{ $message }}</span>
+                                    @enderror
+                                </label>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class="label-text">Target</span>
+                                </label>
+                                <input type="number" step="1" min="1" max="5" name="target" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" required />
+                                <label class="label">
+                                    @error('target')
+                                        <span class="label-text-alt text-error">{{ $message }}</span>
+                                    @enderror
+                                </label>
+                            </div>
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class="label-text">Tipe</span>
+                                </label>
+                                <select name="tipe" class="input input-bordered w-full max-w-xs text-dark">
+                                    <option value="core">Core</option>
+                                    <option value="secondary">Secondary</option>
+                                </select>
+                                <label class="label">
+                                    @error('tipe')
                                         <span class="label-text-alt text-error">{{ $message }}</span>
                                     @enderror
                                 </label>
@@ -237,6 +291,8 @@
                     $("input[name='kode']").val(items[1]);
                     $("input[name='nama']").val(items[2]);
                     $("input[name='bobot']").val(items[3]);
+                    $("input[name='target']").val(items[6]);
+                    $("select[name='tipe']").val(items[7]);
 
                     // Loading effect end
                     loading = "";
