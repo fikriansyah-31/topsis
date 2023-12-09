@@ -26,7 +26,7 @@ class KriteriaRequest extends FormRequest
         return [
             "kode" => "required|string|max:255",
             "nama" => "required|string|max:255",
-            "bobot" => "required|numeric|min:0.1|max:0.9",
+            "bobot" => "required|numeric|min:0.01|max:0.9",
             "target" => "required|numeric|min:1|max:5",
             "tipe" => "required",
         ];

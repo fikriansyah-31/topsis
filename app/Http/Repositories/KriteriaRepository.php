@@ -78,13 +78,6 @@ class KriteriaRepository
         } catch (Exception $e) {
             dd($e);
         }
-        // $data = [
-        //     $this->penilaian->where('kriteria_id', $id)->delete(),
-        //     $this->subKriteria->where('kriteria_id', $id)->delete(),
-        //     $this->kriteria->where('id', $id)->delete(),
-        // ];
-        dd($data);
-        return $data;
     }
 
     public function getSumBobot()

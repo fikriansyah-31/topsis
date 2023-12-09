@@ -100,7 +100,7 @@
                                 <label class="label">
                                     <span class="label-text">Bobot</span>
                                 </label>
-                                <input type="number" step="0.1" name="bobot" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" value="{{ old('bobot') }}" required />
+                                <input type="number" step="0.01" name="bobot" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" value="{{ old('bobot') }}" required />
                                 <label class="label">
                                     @error('bobot')
                                         <span class="label-text-alt text-error">{{ $message }}</span>
@@ -178,7 +178,7 @@
                                     <span class="label-text">Bobot</span>
                                     <span class="label-text-alt" id="loading_edit3"></span>
                                 </label>
-                                <input type="number" step="0.1" name="bobot" placeholder="Type here" class="input input-bordered w-full text-dark" required />
+                                <input type="number" step="0.01" name="bobot" placeholder="Type here" class="input input-bordered w-full text-dark" required />
                                 <label class="label">
                                     @error('bobot')
                                         <span class="label-text-alt text-error">{{ $message }}</span>
