@@ -7,8 +7,7 @@
                     <script>
                         document.write(new Date().getFullYear() + ",");
                     </script>
-                    made with <i class="ri-heart-fill text-red-500"></i> by
-                    for a better web. = HANAANRIDHO/191011400348
+                    HANAANRIDHO/191011400348
                 </div>
             </div>
         </div>
